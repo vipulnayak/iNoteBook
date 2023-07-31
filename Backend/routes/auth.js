@@ -39,7 +39,7 @@ router.post('/createuser', [
                 id: user.id
             }
         }
-        const authtoken = jwt.sign(data, JWT_SECRET);
+        const authtoken = jwt.sign(data, JWT_SECRET, { expiresIn: "365d" });
 
         res.json(authtoken)
 
