@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const dbHost = process.env.dburl;
 
 const connectToMongo = async function connectToDatabase() {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/iNotebook', {
+    await mongoose.connect(dburl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
