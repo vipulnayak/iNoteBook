@@ -3,7 +3,7 @@ const dbHost = process.env.dburl;
 
 const connectToMongo = async function connectToDatabase() {
   try {
-    await mongoose.connect(dburl, {
+    await mongoose.connect(process.env.dburl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

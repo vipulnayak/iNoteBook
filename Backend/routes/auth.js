@@ -3,6 +3,7 @@ const User = require('../models/User');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+// const {bcrypt} = require('bcryptjs')
 var jwt = require('jsonwebtoken');
 var fetchuser = require('../middleware/fetchuser');
 
@@ -26,8 +27,8 @@ router.post('/createuser', [
             return res.status(400).json({ error: "Sorry a user with this email already exists" })
         }
 
-        const salt = await bcrypt.gensalt(10);
-        const secPass = await bycrpt.hash(req.body.password, salt);
+        const salt = await bcrypt.genSalt(10);
+        const secPass = await bcrypt.hash(req.body.password, salt);
         // Create a new user
         user = await User.create({
             name: req.body.name,
@@ -41,7 +42,7 @@ router.post('/createuser', [
         }
         const authtoken = jwt.sign(data, JWT_SECRET, { expiresIn: "365d" });
 
-        res.json(authtoken)
+        res.json({authtoken})
 
     } catch (error) {
         console.error(error.message);
@@ -86,11 +87,11 @@ router.post('/login', [
 })
 
 
-// ROUTE 3: Get loggedin User Details using: POST "/api/auth/getuser". Login required
-router.post('/getuser', fetchuser, async (req, res) => {
+// ROUTE 3: Get loggedin User Details using: GET "/api/auth/getuser". Login required
+router.get('/getuser', fetchuser, async (req, res) => {
 
     try {
-        userId = req.user.id;
+       const userId = req.user.id;
         const user = await User.findById(userId).select("-password")
         res.send(user)
     } catch (error) {
