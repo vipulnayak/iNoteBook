@@ -59,7 +59,7 @@ const Notes = () => {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button disabled={note.etitle.length<5 || note.etitle.description<5} ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button onClick={handleClick} type="button" className="btn btn-primary">Update Note</button>
                         </div>
                     </div>
@@ -68,6 +68,7 @@ const Notes = () => {
 
             <div className="row my-3">
                 <h2>You Notes</h2>
+                {notes.length===0 && <h4>No notes to display</h4>}
                 {notes.map((note) => {
                     return <Noteitem key={note._id} updateNote={updateNote} note={note} />
                 })}
