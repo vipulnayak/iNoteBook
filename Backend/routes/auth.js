@@ -42,7 +42,7 @@ router.post('/createuser', [
         }
         const authtoken = jwt.sign(data, JWT_SECRET, { expiresIn: "365d" });
 
-        res.json({authtoken})
+        res.json({ authtoken })
 
     } catch (error) {
         console.error(error.message);
@@ -78,7 +78,8 @@ router.post('/login', [
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET);
-        res.json({ authtoken })
+        success = true;
+        res.json({ success, authtoken })
 
     } catch (error) {
         console.error(error.message);
@@ -91,7 +92,7 @@ router.post('/login', [
 router.get('/getuser', fetchuser, async (req, res) => {
 
     try {
-       const userId = req.user.id;
+        const userId = req.user.id;
         const user = await User.findById(userId).select("-password")
         res.send(user)
     } catch (error) {
