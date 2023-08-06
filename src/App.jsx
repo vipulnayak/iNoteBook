@@ -1,30 +1,44 @@
-import React from "react";
-import "./App.css";
-import Navbar from "./Components/Navbar";
-import {  Routes, Route, Router } from "react-router-dom";
-import Home from "./Components/Home";
-import About from "./Components/About";
-import { Alert } from "./Components/Alert";
-import NoteState from "./context/Notestate";
-import Login from "./Components/Login";
+import './App.css';
+import { useState } from 'react';
+import {  Routes, Route } from "react-router-dom";
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import NoteState from './context/NoteState';
+import Alert from './components/Alert';
+import Login from './components/Login';
+import Signup from './components/SignUp';
 
 function App() {
+  const [alert, setAlert] = useState(null)
+  const showAlert=(message,type)=>{
+    setAlert({
+      msg:message,
+      type:type
+    })
+    setTimeout(() => {
+      setAlert(null)
+    }, 1500);
+  }
   return (
+
     <>
       <NoteState>
-        <Navbar />
-        <Alert message="This is amazing React course" />
-        <div className="container">
-           <Routes>
-          <Route exact path="/" element={<Home/>}/>
-          <Route exact path="/about" element={<About/>}/>
-          <Route exact path="/login" element={<Login/>}/>
-          {/* <Route exact path="/about" element={<About/>}/> */}
-        </Routes>
-        </div>
+          <Navbar />
+          <Alert alert={alert}/>
+          <div className="container">
+            <Routes>
+              <Route exact path="/" element={<Home showAlert={showAlert} />} />
+              <Route exact path="/about" element={<About />} />
+              <Route exact path="/login" element={<Login showAlert={showAlert}/>} />
+              <Route exact path="/signup" element={<Signup showAlert={showAlert}/>} />
+
+            </Routes>
+          </div>
       </NoteState>
     </>
-  )
+
+  );
 }
 
 export default App;
