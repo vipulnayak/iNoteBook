@@ -21,10 +21,9 @@ function App() {
     }, 1500);
   }
   return (
-
     <>
       <NoteState>
-          <Navbar />
+          <Navbar/>
           <Alert alert={alert}/>
           <div className="container">
             <Routes>
@@ -32,7 +31,6 @@ function App() {
               <Route exact path="/about" element={<About />} />
               <Route exact path="/login" element={<Login showAlert={showAlert}/>} />
               <Route exact path="/signup" element={<Signup showAlert={showAlert}/>} />
-
             </Routes>
           </div>
       </NoteState>
