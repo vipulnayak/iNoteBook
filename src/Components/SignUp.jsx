@@ -15,7 +15,7 @@ const Signup = (props) => {
   };
 
   const handleSubmit = async (e) => {
-    let host = "http://localhost:5000";
+    let host = "http://i-notebook-api-one.vercel.app";
     e.preventDefault();
     const responce = await fetch(`${host}/api/auth/createuser`, {
       method: "POST",
