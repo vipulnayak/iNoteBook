@@ -7,7 +7,7 @@ const Login = (props) => {
 
         let email = document.getElementById("email").value
         let pass = document.getElementById("password").value
-        const respone = await fetch(`http://i-notebook-api-one.vercel.app/api/auth/login`, {
+        const respone = await fetch(`https://i-notebook-api-one.vercel.app/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email, password: pass })
